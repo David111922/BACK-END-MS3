@@ -8,7 +8,7 @@ const port = 3000;
 app.get('/search/:query', async (req, res) => {
   const { query } = req.params;
   const apiUrl = `https://openlibrary.org/search.json?q=${query}`;
-  
+//   console.logconsole.log(`Searching Open Library with URL: ${apiUrl}`);
   try {
     const response = await axios.get(apiUrl);
     res.json(response.data); // Send back the search results
