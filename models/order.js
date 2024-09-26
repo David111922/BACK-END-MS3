@@ -1,21 +1,26 @@
-const sequelize = require('sequelize'); //import sequelize
-const { DataTypes } = require('sequelize'); //import DataTypes from sequelize
-const db = require('../config/db'); //import the database connection
+const { Sequelize, DataTypes } = require('sequelize');
+const db = require('../config/db');
 
-const order = new sequelize(db, { //define the order model
-user:{
-    type: DataTypes.ObjectId,   //define the user field as an ObjectId
-    ref: 'User',
-},
-books:{
-    type: DataTypes.ObjectId,
-    ref: 'Book',
-},
-status:{
-    type: String,
-    default: "order Placed",
-    enum: ["order Placed", "order Accepted", "order Delivered", "order Cancelled"], // define the status field as an enum
-},
+const Order = db.define('Order', {
+   userId:{
+       type: DataTypes.INTEGER,
+       references: {
+         model: 'Users', // 'Users' refers to table name
+         key: 'id', // 'id' refers to column name in Users table
+       }
+    },
+    bookId:{
+        type: DataTypes.INTEGER,
+        references: {
+          model: 'Books', // 'Books' refers to table name
+          key: 'id', // 'id' refers to column name in Books table
+        }
+    },
+    status:{
+        type: DataTypes.ENUM,
+        values: ["order Placed", "order Accepted", "order Delivered", "order Cancelled"],
+        defaultValue: "order Placed",
+    },
 }, {timestamps: true});
 
-module.exports = order;
+module.exports = Order;
