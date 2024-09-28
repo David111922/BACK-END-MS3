@@ -6,6 +6,7 @@ const port = 3000;
 app.use(express.json()); // Add this line to handle JSON requests
 
 const booksRouter = require('./controller/books')
+app.use('/books', booksRouter); // This will route all '/books' requests to booksRouter
 // Search for books based on a query (e.g., title or author)
 app.get('/search/:query', async (req, res) => {
   const { query } = req.params;

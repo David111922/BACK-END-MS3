@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const db = require("../models");
 
+// adjust the path according to your project structure
+
 // Middleware to parse JSON bodies
 router.use(express.json());
 
