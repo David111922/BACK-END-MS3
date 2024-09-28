@@ -1,21 +1,21 @@
 {
   "development": {
     "username": "postgres",
-    "password": "Papasseit@2762",
+    "password": "Boogy1527",
     "database": "MS3-Books",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
   "test": {
     "username": "postgres",
-    "password": "Papasseit@2762",
+    "password": "Boogy1527",
     "database": "database_test",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
   "production": {
     "username": "postgres",
-    "password": "Papasseit@2762",
+    "password": "Boogy1527",
     "database": "database_production",
     "host": "127.0.0.1",
     "dialect": "postgres"
