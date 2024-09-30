@@ -18,6 +18,7 @@ module.exports = (sequelize, DataTypes) => {
     authors: DataTypes.JSONB,
     isbn: DataTypes.STRING,
     openLibraryKey: DataTypes.STRING,
+    key: DataTypes.STRING,
     cover_i: DataTypes.STRING,
 
   }, {
