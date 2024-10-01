@@ -65,7 +65,7 @@ router.put('/:id', async (req, res) => {
 // DELETE endpoint to remove a book by ID
 router.delete('/:id', async (req, res) => {
     const { id } = req.params;
-
+    const { title, authors, isbn } = req.body;
     try {
         const deletedCount = await db.Book.destroy({ where: { id } });
 
