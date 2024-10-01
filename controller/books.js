@@ -9,7 +9,7 @@ router.use(express.json());
 
 // POST endpoint to create a new book
 router.post('/', async (req, res) => {
-    const { title, authors, isbn, openLibraryKey, cover_i } = req.body;
+    const { title, authors, isbn, openLibraryKey, cover_i, key } = req.body;
 
     console.log('Received POST request with body:', req.body); // Debugging line to check the incoming data
 
@@ -21,6 +21,7 @@ router.post('/', async (req, res) => {
             isbn,
             openLibraryKey,
             cover_i,
+            key
         });
         res.status(201).json(newBook);
     } catch (error) {
@@ -43,11 +44,10 @@ router.get('/', async (req, res) => { // Adjusted path to match POST
 // PUT endpoint to update a book by ID
 router.put('/:id', async (req, res) => {
     const { id } = req.params;
-    const { title, authors, isbn } = req.body;
-
+    const { title, authors, isbn, openLibraryKey, cover_i, key } = req.body;
     try {
         const [updatedCount] = await db.Book.update(
-            { title, authors, isbn },
+            { title, authors, isbn, openLibraryKey, cover_i, key },
             { where: { id } }
         );
 
@@ -65,7 +65,8 @@ router.put('/:id', async (req, res) => {
 // DELETE endpoint to remove a book by ID
 router.delete('/:id', async (req, res) => {
     const { id } = req.params;
-    const { title, authors, isbn } = req.body;
+    // !pobably don't need const with params since it is deleting by id
+    // const { title, authors, isbn } = req.body;
     try {
         const deletedCount = await db.Book.destroy({ where: { id } });
 
