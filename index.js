@@ -1,9 +1,12 @@
 require('dotenv').config();
 const express = require('express');
 const axios = require('axios');
+const cors = require('cors');
 const app = express();
 const port = 3000;
-app.use(express.json()); // Add this line to handle JSON requests
+
+app.use(express.json());
+ // Add this line to handle JSON requests
 
 const booksRouter = require('./controller/books')
 const userRouter = require('./controller/user')
@@ -11,20 +14,21 @@ const userRouter = require('./controller/user')
 // routes
 app.use('/books', booksRouter); // This will route all '/books' requests to booksRouter
 app.use('/users', userRouter);
+app.use(cors());
 
 // Search for books based on a query (e.g., title or author)
 app.get('/search/:query', async (req, res) => {
   const { query } = req.params;
   console.log('query:', query);
 
-  const apiUrl = `https://openlibrary.org/search.json?q=${query}&limit=2`; // Limit to 2 results
+  const apiUrl = `https://openlibrary.org/search.json?q=${query}&limit=10`; // Limit to 2 results
   
   try {
     const response = await axios.get(apiUrl);
 
     // Check if docs exist and return only the first two results
     if (response.data.docs && response.data.docs.length > 0) {
-      const books = response.data.docs.slice(0, 2).map(book => ({
+      const books = response.data.docs.map(book => ({
         title: book.title,
         authors: book.author_name || [],  // Handle authors being undefined
         key: book.key,
