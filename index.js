@@ -21,14 +21,14 @@ app.get('/search/:query', async (req, res) => {
   const { query } = req.params;
   console.log('query:', query);
 
-  const apiUrl = `https://openlibrary.org/search.json?q=${query}&limit=10`; // Limit to 2 results
+  const apiUrl = `https://openlibrary.org/search.json?q=${query}&limit=10`; // Limit to 10 results
   
   try {
     const response = await axios.get(apiUrl);
 
     // Check if docs exist and return only the first two results
     if (response.data.docs && response.data.docs.length > 0) {
-      const books = response.data.docs.slice(0, 2).map(book => ({
+      const books = response.data.docs.map(book => ({
         title: book.title,
         authors: book.author_name || [],  // Handle authors being undefined
         key: book.key,
