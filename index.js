@@ -4,10 +4,16 @@ const axios = require('axios');
 const cors = require('cors');
 const app = express();
 const port = 3000;
+<<<<<<< HEAD
 app.use(express.json()); // Add this line to handle JSON requests
 app.use(cors({
   origin: 'http://localhost:5000', // if your frontend runs on port 5000
 }));
+=======
+
+app.use(express.json());
+ // Add this line to handle JSON requests
+>>>>>>> 7858c0338b4c1179f56ea61a7b731e4d59fca548
 
 const booksRouter = require('./controller/books')
 const userRouter = require('./controller/user')
@@ -15,13 +21,18 @@ const userRouter = require('./controller/user')
 // routes
 app.use('/books', booksRouter); // This will route all '/books' requests to booksRouter
 app.use('/users', userRouter);
+app.use(cors());
 
 // Search for books based on a query (e.g., title or author)
 app.get('/search/:query', async (req, res) => {
   const { query } = req.params;
   console.log('query:', query);
 
+<<<<<<< HEAD
   const apiUrl = `https://openlibrary.org/search.json?q=${query}&limit=10`; // Limit to 10 results
+=======
+  const apiUrl = `https://openlibrary.org/search.json?q=${query}&limit=10`; // Limit to 2 results
+>>>>>>> 7858c0338b4c1179f56ea61a7b731e4d59fca548
   
   try {
     const response = await axios.get(apiUrl);
