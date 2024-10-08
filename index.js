@@ -4,7 +4,9 @@ const axios = require('axios');
 const cors = require('cors');
 const app = express();
 const port = 3000;
-app.use(express.json()); // Add this line to handle JSON requests
+app.use(express.json());
+ // Add this line to handle JSON requests
+//  app.use(express.static(path.join(__dirname, 'frontend/build')));
 app.use(cors({
   origin: 'http://localhost:5000', // if your frontend runs on port 5000
 }));
@@ -13,6 +15,7 @@ const booksRouter = require('./controller/books')
 const userRouter = require('./controller/user')
 
 // routes
+
 app.use('/books', booksRouter); // This will route all '/books' requests to booksRouter
 app.use('/users', userRouter);
 app.use(cors());
