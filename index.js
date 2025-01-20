@@ -18,15 +18,13 @@ const userRouter = require('./controller/user')
 
 app.use('/books', booksRouter); // This will route all '/books' requests to booksRouter
 app.use('/users', userRouter);
-app.use(cors());
+
 
 // Search for books based on a query (e.g., title or author)
 app.get('/search/:query', async (req, res) => {
   const { query } = req.params;
   console.log('query:', query);
-
-  const apiUrl = `https://openlibrary.org/search.json?q=${query}&limit=10`; // Limit to 10 results
-  
+  const apiUrl = `https://openlibrary.org/search.json?title="${query}"&limit=10`;
   try {
     const response = await axios.get(apiUrl);
 
